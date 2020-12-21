@@ -5,8 +5,8 @@ body {
 }
 
 #homePage {
-    border: #FFA692 3px solid;
-    background-color: #F8F9FA;
+    border: #ffa692 3px solid;
+    background-color: #f8f9fa;
     padding: 3em;
 }
 
@@ -15,16 +15,22 @@ body {
     display: none;
 }
 
+
+/* #recipes {
+    background-color: white;
+    display: none;
+} */
+
 .resultHeader {
-    font-family: 'Pacifico', cursive;
+    font-family: "Pacifico", cursive;
 }
 
 .navbar {
-    border: #8BE7FF 3px solid;
+    border: #8be7ff 3px solid;
 }
 
 .navbar-light .navbar-toggler {
-    border: solid #FFA692;
+    border: solid #ffa692;
 }
 
 .navbar-toggler-icon {
@@ -94,7 +100,7 @@ input:focus::placeholder {
 
 #homeSearchInput:hover,
 #navSearchInput:hover {
-    box-shadow: 0 1px 6px rgba(32, 33, 36, .28);
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
     border-color: rgba(223, 225, 229, 0);
 }
 
@@ -132,7 +138,7 @@ input:focus::placeholder {
 
 .moreInfoButton,
 .recipeLink {
-    background-color: #8BE7FF;
+    background-color: #8be7ff;
     border: none;
     color: black;
     margin: 2px;
@@ -140,13 +146,13 @@ input:focus::placeholder {
 
 .moreInfoButton:hover,
 .recipeLink:hover {
-    background-color: #FFA692;
+    background-color: #ffa692;
     color: black;
 }
 
 .callPhoneButton,
 .recipeVideo {
-    background-color: #FFA692;
+    background-color: #ffa692;
     border: none;
     color: black;
     margin: 2px;
@@ -154,7 +160,7 @@ input:focus::placeholder {
 
 .callPhoneButton:hover,
 .recipeVideo:hover {
-    background-color: #8BE7FF;
+    background-color: #8be7ff;
     color: black;
 }
 
@@ -177,11 +183,11 @@ article {
     margin: auto;
     margin-top: 5vh;
     border-radius: 10px;
-    background-color: #F8F9FA;
+    background-color: #f8f9fa;
 }
 
 .card {
-    background-color: #F8F9FA;
+    background-color: #f8f9fa;
     height: 475px;
     padding: 0;
     margin: 0 auto;
@@ -246,7 +252,7 @@ img {
         padding-bottom: 1px;
     }
     #recipeBtn {
-        padding: 0px
+        padding: 0px;
     }
 }
 
