@@ -5,8 +5,9 @@ $(document).ready(function() {
 
     var restaurants = [];
 
-    let resultsCount = 3;
+    let resultsCount = 6;
     let sortType = "rating";
+    let userFood = "";
 
     let latitude = "";
     let longitude = "";
@@ -16,13 +17,14 @@ $(document).ready(function() {
 
     let userFoodNavSearch = document.querySelector("#navSearch")
     let userFoodNavInput = document.querySelector("#navSearchInput")
+    let resultPage = document.querySelector("#resultPage")
 
     let test = false;
 
     userFoodSearch.addEventListener('click', (event) => {
         event.preventDefault();
         let foodSearchButton = event.target;
-        let userFood = "";
+
 
         switch (foodSearchButton.id) {
             case "homeSearch":
@@ -38,7 +40,7 @@ $(document).ready(function() {
         if (userFood == "") return;
 
         restaurantSearchAPI(userFood);
-        recipeSearchAPI(userFood);
+        // recipeSearchAPI(userFood);
 
         userFoodInput.value = "";
         document.activeElement.blur();
@@ -48,7 +50,6 @@ $(document).ready(function() {
     userFoodNavSearch.addEventListener('click', (event) => {
         event.preventDefault();
         let foodSearchNavButton = event.target;
-        let userFood = "";
 
         switch (foodSearchNavButton.id) {
             case "navSearch":
@@ -64,7 +65,7 @@ $(document).ready(function() {
         if (userFood == "") return;
 
         restaurantSearchAPI(userFood)
-        recipeSearchAPI(userFood);
+            // recipeSearchAPI(userFood);
 
         userFoodNavInput.value = "";
         document.activeElement.blur();
@@ -95,8 +96,10 @@ $(document).ready(function() {
             },
 
         }).then(function(data) {
-            console.log(data.restaurants)
+            console.log("restaurant results", data.restaurants)
             restaurants = data.restaurants;
+
+            recipeSearchAPI(userFood);
 
             for (var i = 0; i < restaurants.length; i++) {
                 const newRest = restaurants[i].restaurant;
@@ -134,6 +137,15 @@ $(document).ready(function() {
 
                 // let restUrl = restDiv.querySelector(".restUrl");
                 // restUrl.href = newRestUrl;
+
+                let restaurantHeaderSlashDiv = fragmentFromString(`<h1 id="restHeader" class="resultHeader">Restaurants</h1>
+                </hr>
+                <div id="restaurants"></div>`)
+
+                if (i === 0) {
+                    resultPage.appendChild(restaurantHeaderSlashDiv)
+
+                }
                 const restAurants = document.querySelector("#restaurants")
 
                 let newRestArticle = fragmentFromString(`<article id="rest0" class="row mx-auto">
@@ -177,7 +189,7 @@ $(document).ready(function() {
     };
 
     recipeApiKey = "9973533";
-    foodTypeSearch = "Mexican";
+    // foodTypeSearch = "Mexican";
 
     let mealIds = [];
     let recipeArray = [];
@@ -189,7 +201,7 @@ $(document).ready(function() {
             url: "https://www.themealdb.com/api/json/v2/9973533/filter.php?a=" + search2,
 
         }).then(function(data2) {
-            console.log(data2.meals)
+            // console.log(data2.meals)
             mealsArray = data2.meals;
             mealIds = [];
             recipeArray = [];
@@ -200,7 +212,7 @@ $(document).ready(function() {
                 mealIds.push(newMealId);
             }
 
-            console.log(mealIds);
+            console.log("meal ID results", mealIds);
             let recipeReturns = 0;
             for (let j = 0; j < mealIds.length; j++) {
                 const recipeId = mealIds[j];
@@ -224,14 +236,14 @@ $(document).ready(function() {
     };
 
     function putMyRecipesOnThePage() {
-        console.log(recipeArray);
+        console.log("recipe results", recipeArray);
 
-        for (var r = 0; r < 3; r++) {
+        for (var r = 0; r < 9; r++) {
             const recipe1 = recipeArray[r];
             newRecipe = recipe1.meals[0];
 
             // let newRecipeName = newRecipe.strMeal;
-            // let newRecipeImg = newRecipe.strMealThumb;
+            let newRecipeImg = newRecipe.strMealThumb;
             // let newRecipeCategory = newRecipe.strCategory;
             // let newRecipeLink = newRecipe.strSource;
             // let newRecipeVideo = newRecipe.strYoutube;
@@ -244,9 +256,9 @@ $(document).ready(function() {
 
             // let recipeImg = recipeDiv.querySelector(".recipeImg");
             // recipeImg.src = newRecipeImg;
-            // if (newRecipeImg === "") {
-            //     recipeImg.src = recipePlacehold;
-            // }
+            if (newRecipeImg === "") {
+                recipeImg.src = recipePlacehold;
+            }
 
             // let recipeCategory = recipeDiv.querySelector(".recipeCategory");
             // recipeCategory.textContent = newRecipeCategory;
@@ -256,8 +268,28 @@ $(document).ready(function() {
 
             // let recipeVideo = recipeDiv.querySelector(".recipeVideo");
             // recipeVideo.href = newRecipeVideo;
+            let recipeRow1 = fragmentFromString(`<h3 id="recipeHeader" class="resultHeader">Recipes</h3>
+            </hr>
+            <div id="recipes1" class="row justify-content-around mx-auto mt-5 recipeRow">
+            </div>`)
+            let recipeRow2 = fragmentFromString(`<div id="recipes2" class="row justify-content-around mx-auto mt-5 recipeRow">
+            </div>`)
+            let recipeRow3 = fragmentFromString(`<div id="recipes3" class="row justify-content-around mx-auto mt-5 recipeRow">
+            </div>`)
 
-            const recipes = document.querySelector("#recipes")
+            if (r === 0) {
+                resultPage.appendChild(recipeRow1)
+
+            } else if (r > 2 && r < 6) {
+                resultPage.appendChild(recipeRow2)
+
+            } else {
+                resultPage.appendChild(recipeRow3)
+            }
+
+            const recipes1 = document.querySelector("#recipes1")
+            const recipes2 = document.querySelector("#recipes2")
+            const recipes3 = document.querySelector("#recipes3")
 
             let newRecipeCard = fragmentFromString(`<div id="recipe0" class="">
                 <div class="card p-3" style="width: 18rem;">
@@ -274,7 +306,13 @@ $(document).ready(function() {
                 </div>
             </div>`)
 
-            recipes.appendChild(newRecipeCard)
+            if (r < 3) {
+                recipes1.appendChild(newRecipeCard)
+            } else if (r > 2 && r < 6) {
+                recipes2.appendChild(newRecipeCard)
+            } else {
+                recipes3.appendChild(newRecipeCard)
+            }
 
             function fragmentFromString(strHTML) {
                 return document.createRange().createContextualFragment(strHTML);
