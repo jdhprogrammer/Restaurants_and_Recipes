@@ -4,15 +4,32 @@ body {
     color: rgb(42, 42, 42);
 }
 
+#loading {
+    height: 200px;
+    top: 100;
+    display: none;
+    opacity: 0.7;
+    background-color: #fff;
+    z-index: 99;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#loading-image {
+    position: relative z-index: 100;
+}
+
 #homePage {
     border: #ffa692 3px solid;
     background-color: #f8f9fa;
     padding: 3em;
+    display: inline-block;
 }
 
 #resultPage {
     background-color: white;
     display: none;
+    height: fit-content;
 }
 
 
@@ -56,6 +73,7 @@ input:focus::placeholder {
 .navPad {
     padding-left: 10px;
     padding-right: 10px;
+    margin-bottom: 1em;
 }
 
 #homeSearchInput,
@@ -256,67 +274,11 @@ img {
     }
 }
 
-
-/* .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 560%;
-    height: 315px;
-    cursor: pointer;
-} */
-
-
-/*
-button{
-  text-align: center;
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
-.recipeRow{
-  margin-top: 10vh;
-}
-.recipeD{
-  margin: 1vh;
-  min-width: 250px;
-}
-/*.resultCont{
-  display: none;
-}
-/*
-
-
-
-footer{
-  margin-top: 5vh;
-  height: 2vh;
-  width: 100vw;
-  background-color: red;
-  float: right;
-  
-  
-}
-
-/*
-Old Nav
-nav{
-  text-align: center;
-  color: gold;
-  background-color: cyan;
-}
-.titlebar{
-  min-width: 20vw;
-  position: fixed;
-  bottom: 95%;
-  z-index: 1;
-}
-.mainNav{
-  font-size: 20px;
-  color: gold;
-  background-color: crimson;
-}
-.sideNav{
-  font-size: 15px;
-  background-color:rgb(143, 12, 38);
-  border-radius: 0 0 0 50%;
-  padding-top: 15px;
-}
-*/
